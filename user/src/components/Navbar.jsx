@@ -3,6 +3,7 @@ import { Badge } from '@material-ui/core';
 import React from 'react'
 import styled from 'styled-components'
 import { mobile } from '../responsive';
+import {useSelector} from "react-redux"
 
 const Container = styled.div`
     height: 60px;
@@ -67,6 +68,8 @@ const MenuItem = styled.div`
     ${mobile({fontSize: "12px",marginLeft: "10px"})}
 `
 const Navbar = () => {
+    const cart = useSelector(state=>state.cart)
+    console.log(cart)
     return (
         <Container>
             <Wrapper>

@@ -26,5 +26,8 @@
     "nodemon": "^1.19.4",
     "react-stripe-checkout": "^2.6.3",
     "stripe": "^9.14.0"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }
