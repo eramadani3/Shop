@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "server": "nodemon index.js --ignore client"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eramadani3/SeptemberThe3rdAPI.git"
   },
+  "proxy": "http://localhost:3000/",
   "keywords": [],
   "author": "",
   "license": "ISC",

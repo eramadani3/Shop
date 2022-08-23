@@ -33,10 +33,12 @@ const Products = ({ cat, filters, sort }) => {
     cat &&
       setFilteredProducts(
         products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
+          Object.entries(filters).every(([key, value]) =>{
+          return(
             item[key].includes(value)
           )
-        )
+        })
+          )
       );
   }, [products, cat, filters]);
 
