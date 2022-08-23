@@ -1,13 +1,15 @@
+import { useState } from "react";
 import {
   FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
-import React, {useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { publicRequest } from "../requestMethods";
+import { useEffect } from "react";
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -70,24 +72,10 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item}) => {
-  const location = useLocation();
-  const id = location.pathname.split("/")[2];
-
-  const [product, setProduct] = useState({})
-
-  useEffect=(()=>{
-    const getProduct = async ()=>{
-      try{
-        const res = await publicRequest.get("/products/find/"+id)
-        setProduct(res.data);
-      }catch{}
-    }
-    getProduct()
-  },[id])
   return (
     <Container>
       <Circle />
-      <Image src={product.img} />
+      <Image src={item.img} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
