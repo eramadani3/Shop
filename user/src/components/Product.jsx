@@ -1,15 +1,11 @@
-import { useState } from "react";
 import {
   FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
-
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { publicRequest } from "../requestMethods";
-import { useEffect } from "react";
+
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -71,7 +67,8 @@ const Icon = styled.div`
   }
 `;
 
-const Product = ({ item}) => {
+const Product = ({ item }) => {
+  
   return (
     <Container>
       <Circle />
