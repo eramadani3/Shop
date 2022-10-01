@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from "axios";
 
@@ -32,12 +31,13 @@ const Products = ({ cat, filters, sort }) => {
   useEffect(() => {
     cat &&
       setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
-          )
-        )
+        products.filter((item) => {
+          return Object.entries(filters).every(([key, value]) => {
+            return item[key].includes(value);
+          });
+        })
       );
+    console.log(filteredProducts);
   }, [products, cat, filters]);
 
   useEffect(() => {

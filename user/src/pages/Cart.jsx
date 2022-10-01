@@ -1,15 +1,16 @@
 import { Add, Remove } from "@material-ui/icons";
-import styled from "styled-components"
-import Announcement from "../components/Announcement"
-import Footer from "../components/Footer"
-import Navbar from "../components/Navbar"
+import styled from "styled-components";
+import Announcement from "../components/Announcement";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
-  ${mobile({padding: "10px"})}
+  ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -27,13 +28,14 @@ const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
   cursor: pointer;
-  border: ${props=>props.type === "filled" && "none"};
-  background-color: ${props=>props.type === "filled" ? "black" : "transparent"};
-  color: ${props=>props.type === "filled" && "white"};
+  border: ${(props) => props.type === "filled" && "none"};
+  background-color: ${(props) =>
+    props.type === "filled" ? "black" : "transparent"};
+  color: ${(props) => props.type === "filled" && "white"};
 `;
 
 const TopTexts = styled.div`
-${mobile({display: "none"})}
+  ${mobile({ display: "none" })}
 `;
 
 const TopText = styled.span`
@@ -45,7 +47,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
-  ${mobile({flexDirection: "column"})}
+  ${mobile({ flexDirection: "column" })}
 `;
 const Info = styled.div`
   flex: 3;
@@ -54,7 +56,7 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
-  ${mobile({flexDirection: "column"})}
+  ${mobile({ flexDirection: "column" })}
 `;
 const ProductDetail = styled.div`
   flex: 2;
@@ -75,7 +77,7 @@ const ProductColor = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: ${props=>props.color}
+  background-color: ${(props) => props.color};
 `;
 const ProductSize = styled.span``;
 const PriceDetail = styled.div`
@@ -93,12 +95,12 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
-  ${mobile({margin: "5px 15px"})}
+  ${mobile({ margin: "5px 15px" })}
 `;
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
-  ${mobile({marginBottom: "20px"})}
+  ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
@@ -122,8 +124,8 @@ const SummaryItem = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
-  font-weight: ${props=>props.type === "total" && "500"};
-  font-size: ${props=>props.type === "total" && "24px"};
+  font-weight: ${(props) => props.type === "total" && "500"};
+  font-size: ${(props) => props.type === "total" && "24px"};
 `;
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
@@ -136,87 +138,79 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
   return (
     <Container>
-        <Navbar/>
-        <Announcement/>
-        <Wrapper>
-          <Title>YOUR BAG</Title>
-          <Top>
-            <TopButton>CONTINUE SHOPPING</TopButton>
-            <TopTexts>
-              <TopText>Shopping Bag(2)</TopText>
-              <TopText>Your Wishlist (0)</TopText>
-            </TopTexts>
-            <TopButton type="filled">CHECKOUT NOW</TopButton>
-          </Top>
-          <Bottom>
-            <Info>
+      <Navbar />
+      <Announcement />
+      <Wrapper>
+        <Title>YOUR BAG</Title>
+        <Top>
+          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopTexts>
+            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Your Wishlist (0)</TopText>
+          </TopTexts>
+          <TopButton type="filled">CHECKOUT NOW</TopButton>
+        </Top>
+        <Bottom>
+          <Info>
+            {cart.products.map((product) => (
               <Product>
                 <ProductDetail>
-                  <Image src="https://www.givenchy.com/dw/image/v2/BBRT_PRD/on/demandware.static/-/Sites-Givenchy_master/default/dw7f6a0242/images/BM71533Y6B001/BM71533Y6B001-01-01.jpg?sw=1000"/>
+                  <Image src={product.img} />
                   <Details>
-                    <ProductName><b>Product:</b> GIVENCHY SHIRT</ProductName>
-                    <ProductId><b>ID:</b> 93457</ProductId>
-                    <ProductColor color="black"/>
-                    <ProductSize><b>Size:</b> M</ProductSize>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add/>
-                    <ProductAmount>2</ProductAmount>
-                    <Remove/>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove />
                   </ProductAmountContainer>
-                  <ProductPrice>$ 30</ProductPrice>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
                 </PriceDetail>
               </Product>
-              <Hr/>
-              <Product>
-                <ProductDetail>
-                  <Image src="https://blvcks.com/wp-content/uploads/2018/08/givenchy-light-blue-Columbian-fit-Distressed-Printed-Cotton-jersey-T-shirt.jpeg" />
-                  <Details>
-                    <ProductName><b>Product:</b> GIVENCHY SHIRT</ProductName>
-                    <ProductId><b>ID:</b> 93457</ProductId>
-                    <ProductColor color="lightblue"/>
-                    <ProductSize><b>Size:</b> M</ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add/>
-                    <ProductAmount>2</ProductAmount>
-                    <Remove/>
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 30</ProductPrice>
-                </PriceDetail>
-              </Product>
-            </Info>
-            <Summary>
-              <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-              <SummaryItem>
-                <SummaryItemText>Subtotal</SummaryItemText>
-                <SummaryItemPrice>$ 60</SummaryItemPrice>
-              </SummaryItem>
-              <SummaryItem>
-                <SummaryItemText>Estimated Shipping</SummaryItemText>
-                <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-              </SummaryItem>
-              <SummaryItem>
-                <SummaryItemText>Shipping Discount</SummaryItemText>
-                <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-              </SummaryItem>
-              <SummaryItem type="total">
-                <SummaryItemText>Total</SummaryItemText>
-                <SummaryItemPrice>$ 60</SummaryItemPrice>
-              </SummaryItem>
-              <Button>CHECKOUT NOW</Button>
-            </Summary>
-          </Bottom>
-        </Wrapper>
-        <Footer/>
+            ))}
+            <Hr />
+          </Info>
+          <Summary>
+            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <SummaryItem>
+              <SummaryItemText>Subtotal</SummaryItemText>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>Estimated Shipping</SummaryItemText>
+              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>Shipping Discount</SummaryItemText>
+              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem type="total">
+              <SummaryItemText>Total</SummaryItemText>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+            </SummaryItem>
+            <Button>CHECKOUT NOW</Button>
+          </Summary>
+        </Bottom>
+      </Wrapper>
+      <Footer />
     </Container>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

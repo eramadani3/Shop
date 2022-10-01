@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "proxy": "http://localhost:3000",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "server": "nodemon index.js --ignore client"
   },
   "repository": {
     "type": "git",
@@ -18,13 +20,18 @@
   },
   "homepage": "https://github.com/eramadani3/SeptemberThe3rdAPI#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^1.19.4",
     "react-stripe-checkout": "^2.6.3",
     "stripe": "^9.14.0"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }

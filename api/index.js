@@ -7,7 +7,9 @@ const authRoute = require("./routes/auth")
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
-
+const cors = require('cors');
+const multer = require('multer')
+app.use(cors({ origin: true }));
 dotenv.config();
 mongoose.connect(
     process.env.MONGO_URL
