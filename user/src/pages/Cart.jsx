@@ -152,14 +152,14 @@ const Cart = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await userRequest("/checkout/payment", {
-          tokenId: stripeToken,
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
           amount: cart.total * 100,
         });
         navigate("/success", { data: res.data });
       } catch {}
     };
-    makeRequest();
+    stripeToken && cart.total >= 1 && makeRequest();
   }, [stripeToken, cart.total, navigate]);
 
   return (
